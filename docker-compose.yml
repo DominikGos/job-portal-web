@@ -1,0 +1,66 @@
+version: '3.8'
+services:
+
+  app:
+    build:
+      dockerfile: Docker/php/Dockerfile
+      context: .
+    networks:
+      - app
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      - database
+
+  server:
+    build:
+      dockerfile: Docker/nginx/Dockerfile
+      context: .
+    networks:
+      - app
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      - app
+
+  database:
+    image: mysql:8.0
+    networks:
+      - app
+    ports:
+      - 3306:3306
+    volumes:
+      - database:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_DATABASE: '${DB_DATABASE}'
+      MYSQL_USER: '${DB_USERNAME}'
+      MYSQL_PASSWORD: '${DB_PASSWORD}'
+
+  phpmyadmin:
+    image: phpmyadmin
+    networks:
+      - app
+    ports:
+     - 8000:80
+    depends_on:
+      - database
+    environment:
+      PMA_HOST: '${DB_HOST}'
+
+  node:
+    build:
+      dockerfile: Docker/node/Dockerfile
+    volumes:
+      - ./:/var/www/html
+    tty: true
+
+networks:
+  app:
+    driver: bridge
+
+volumes:
+  database:
