@@ -2,6 +2,7 @@ version: '3.8'
 services:
 
   app:
+    container_name: app
     build:
       dockerfile: Docker/php/Dockerfile
       context: .
@@ -13,6 +14,7 @@ services:
       - database
 
   server:
+    container_name: server
     build:
       dockerfile: Docker/nginx/Dockerfile
       context: .
@@ -26,6 +28,7 @@ services:
       - app
 
   database:
+    container_name: database
     image: mysql:8.0
     networks:
       - app
@@ -41,6 +44,7 @@ services:
       MYSQL_PASSWORD: '${DB_PASSWORD}'
 
   phpmyadmin:
+    container_name: phpmyadmin
     image: phpmyadmin
     networks:
       - app
@@ -52,6 +56,7 @@ services:
       PMA_HOST: '${DB_HOST}'
 
   node:
+    container_name: node
     build:
       dockerfile: Docker/node/Dockerfile
     volumes:
