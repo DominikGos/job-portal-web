@@ -1,16 +1,13 @@
-FROM php:8.2-fpm
+FROM php:fpm-alpine
 
 WORKDIR /var/www/html
 
-RUN apt-get update && apt-get install -y \
-    git \
-    curl \
-    libpng-dev \
-    libonig-dev \
-    libxml2-dev \
-    zip \
-    unzip
+RUN docker-php-ext-install mysqli pdo pdo_mysql
 
-RUN docker-php-ext-install pdo pdo_mysql
+RUN apk add --no-cache icu-dev \
+    libzip-dev \
+    && docker-php-ext-configure intl \
+    && docker-php-ext-install intl \
+    && docker-php-ext-install zip
 
-COPY --from=composer:2.6.6 /usr/bin/composer /usr/bin/composer
+COPY --from=composer:2.7.2 /usr/bin/composer /usr/bin/composer
