@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\User;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -20,6 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'phone',
+        'description',
     ];
 
     /**
@@ -43,5 +46,17 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function experience(): HasMany {
+        return $this->hasMany(Experience::class);
+    }
+ 
+    public function education(): HasMany {
+        return $this->hasMany(Education::class);
+    }
+    
+    public function links(): HasMany {
+        return $this->hasMany(Link::class);
     }
 }
