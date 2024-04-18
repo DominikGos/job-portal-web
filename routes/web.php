@@ -1,11 +1,12 @@
 <?php
 
+use App\Models\User\Education;
+use App\Models\User\Experience;
+use App\Models\User\Link;
 use App\Models\User\User;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    $user = User::first();
-    dump($user->links);
 
     return view('welcome');
 });
