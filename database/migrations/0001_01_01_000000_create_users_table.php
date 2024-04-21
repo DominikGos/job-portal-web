@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('avatar')->nullable();
             $table->string('phone')->nullable();
-            $table->text('description')->max(255);
+            $table->string('description')->nullable();
             $table->string('cv')->nullable();
             $table->rememberToken();
             $table->timestamps();
