@@ -2,8 +2,10 @@
 
 namespace App\Models\JobOffer;
 
+use App\Models\Skill;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class JobOffer extends Model
@@ -22,5 +24,9 @@ class JobOffer extends Model
 
     public function salaries(): HasMany {
         return $this->hasMany(Salary::class);
+    }
+
+    public function skills(): BelongsToMany {
+        return $this->belongsToMany(Skill::class, 'job_offer_skills');
     }
 }
