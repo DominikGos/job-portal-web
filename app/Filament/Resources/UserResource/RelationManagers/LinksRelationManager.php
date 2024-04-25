@@ -24,7 +24,7 @@ class LinksRelationManager extends RelationManager
                 TextInput::make('name')
                     ->required()
                     ->maxLength(255),
-                TextInput::make('url')->required(),
+                TextInput::make('link')->required(),
             ]);
     }
 
@@ -34,7 +34,7 @@ class LinksRelationManager extends RelationManager
             ->recordTitleAttribute('name')
             ->columns([
                 TextColumn::make('name')
-                    ->description(fn(Link $link): string => $link->url),
+                    ->description(fn(Link $link): string => $link->link),
             ])
             ->filters([
                 //

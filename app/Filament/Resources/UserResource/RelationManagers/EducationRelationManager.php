@@ -38,7 +38,7 @@ class EducationRelationManager extends RelationManager
             ->recordTitleAttribute('school_name')
             ->columns([
                 TextColumn::make('school_name')
-                    ->description(fn(Education $education): string => $education->description),
+                    ->description(fn(Education $education): ?string => $education->description),
                 TextColumn::make('started_at')->dateTime(),
                 TextColumn::make('end_at')->dateTime(),
             ])
