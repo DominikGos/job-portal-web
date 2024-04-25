@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\UserResource\Pages;
+use App\Filament\Resources\UserResource\RelationManagers\ExperienceRelationManager;
 use App\Models\User\User;
 use Filament\Forms;
 use Filament\Forms\Components\Select;
@@ -60,7 +61,7 @@ class UserResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            ExperienceRelationManager::class,
         ];
     }
 
