@@ -17,6 +17,7 @@ class JobOfferFactory extends Factory
     public function definition(): array
     {
         return [
+            'title' => fake()->randomElement(['PHP', 'Java Script', 'Java', 'C++']) . ' developer',
             'valid_until' => fake()->date($this->timestampFormat),
             'required_level' => fake()->randomElement(['junior', 'mid', 'senior']),
             'work_type' => fake()->randomElement(['remote', 'stationary', 'hybrid']),
