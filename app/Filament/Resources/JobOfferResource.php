@@ -2,7 +2,8 @@
 
 namespace App\Filament\Resources;
 
-use App\Enums\JobLevels;
+use App\Enums\JobOffer\JobLevels;
+use App\Enums\JobOffer\WorkTypes;
 use App\Filament\Resources\JobOfferResource\Pages;
 use App\Filament\Resources\JobOfferResource\RelationManagers;
 use App\Models\JobOffer\JobOffer;
@@ -32,7 +33,9 @@ class JobOfferResource extends Resource
                 TextInput::make('tilte')->required(),
                 DatePicker::make('valid_until')->required(),
                 Select::make('required_level')
-                    ->options(JobLevels::class)
+                    ->options(JobLevels::class),
+                Select::make('work_type')
+                    ->options(WorkTypes::class),
                 
             ]);
     }
@@ -44,6 +47,7 @@ class JobOfferResource extends Resource
                 TextColumn::make('title'),
                 TextColumn::make('valid_until')->dateTime(),
                 TextColumn::make('required_level'),
+                TextColumn::make('work_type'),
 
             ])
             ->filters([
