@@ -3,6 +3,7 @@
 namespace App\Models\JobOffer;
 
 use App\Enums\JobOffer\JobLevels;
+use App\Enums\JobOffer\WorkSchedules;
 use App\Enums\JobOffer\WorkTypes;
 use App\Models\Skill;
 use App\Models\User\User;
@@ -30,6 +31,7 @@ class JobOffer extends Model
     protected $casts = [
         'required_level' => JobLevels::class,
         'work_type' => WorkTypes::class,
+        'work_schedule' => WorkSchedules::class,
     ];
 
     public function salaries(): HasMany {

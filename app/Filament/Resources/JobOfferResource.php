@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Enums\JobOffer\JobLevels;
+use App\Enums\JobOffer\WorkSchedules;
 use App\Enums\JobOffer\WorkTypes;
 use App\Filament\Resources\JobOfferResource\Pages;
 use App\Filament\Resources\JobOfferResource\RelationManagers;
@@ -36,6 +37,8 @@ class JobOfferResource extends Resource
                     ->options(JobLevels::class),
                 Select::make('work_type')
                     ->options(WorkTypes::class),
+                Select::make('work_schedule')
+                    ->options(WorkSchedules::class)
                 
             ]);
     }
@@ -48,6 +51,7 @@ class JobOfferResource extends Resource
                 TextColumn::make('valid_until')->dateTime(),
                 TextColumn::make('required_level'),
                 TextColumn::make('work_type'),
+                TextColumn::make('work_schedule'),
 
             ])
             ->filters([
