@@ -2,15 +2,18 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\JobLevels;
 use App\Filament\Resources\JobOfferResource\Pages;
 use App\Filament\Resources\JobOfferResource\RelationManagers;
 use App\Models\JobOffer\JobOffer;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\SelectColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -28,6 +31,8 @@ class JobOfferResource extends Resource
             ->schema([
                 TextInput::make('tilte')->required(),
                 DatePicker::make('valid_until')->required(),
+                Select::make('required_level')
+                    ->options(JobLevels::class)
                 
             ]);
     }
@@ -37,6 +42,9 @@ class JobOfferResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('title'),
+                TextColumn::make('valid_until')->dateTime(),
+                TextColumn::make('required_level'),
+
             ])
             ->filters([
                 //

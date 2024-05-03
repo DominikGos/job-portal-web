@@ -2,6 +2,7 @@
 
 namespace App\Models\JobOffer;
 
+use App\Enums\JobLevels;
 use App\Models\Skill;
 use App\Models\User\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -23,6 +24,10 @@ class JobOffer extends Model
         'requirements',
         'responsibilities',
         'benefits',
+    ];
+
+    protected $casts = [
+        'required_level' => JobLevels::class,
     ];
 
     public function salaries(): HasMany {
