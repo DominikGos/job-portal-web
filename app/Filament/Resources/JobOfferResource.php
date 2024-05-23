@@ -31,7 +31,7 @@ class JobOfferResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('tilte')->required(),
+                TextInput::make('title')->required(),
                 DatePicker::make('valid_until')->required(),
                 Select::make('required_level')
                     ->options(JobLevels::class),

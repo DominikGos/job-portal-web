@@ -23,9 +23,6 @@ class JobOffer extends Model
         'required_level',
         'work_type',
         'work_schedule',
-        'requirements',
-        'responsibilities',
-        'benefits',
     ];
 
     protected $casts = [
