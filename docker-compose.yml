@@ -61,6 +61,7 @@ services:
       dockerfile: Docker/node/Dockerfile
     volumes:
       - ./:/var/www/html
+      - /var/www/html/node_modules
     tty: true
     ports:
       - 5173:5173

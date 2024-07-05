@@ -2,4 +2,8 @@ FROM node:alpine
 
 WORKDIR /var/www/html
 
-ENTRYPOINT ["npm", "run", "dev"] 
+COPY package*.json ./
+
+RUN npm install
+
+CMD ["npm", "run", "dev"] 
