@@ -9,7 +9,7 @@ class Responsibility extends Model
 {
     use HasFactory;
 
-    protected $fillabel = [
+    protected $fillable = [
         'content'
     ];
 }
