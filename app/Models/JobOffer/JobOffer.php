@@ -42,4 +42,16 @@ class JobOffer extends Model
     public function user(): BelongsTo {
         return $this->belongsTo(User::class);
     }
+
+    public function benefits(): HasMany {
+        return $this->hasMany(Benefit::class);
+    }
+    
+    public function requirements(): HasMany {
+        return $this->hasMany(Requirement::class);
+    }
+
+    public function responsibilities(): HasMany {
+        return $this->hasMany(Responsibility::class);
+    }
 }

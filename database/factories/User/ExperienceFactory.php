@@ -2,6 +2,7 @@
 
 namespace Database\Factories\User;
 
+use App\Traits\TimestampFormat;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -9,6 +10,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class ExperienceFactory extends Factory
 {
+    use TimestampFormat;
     /**
      * Define the model's default state.
      *

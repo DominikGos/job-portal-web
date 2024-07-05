@@ -2,6 +2,7 @@
 
 namespace Database\Factories\JobOffer;
 
+use App\Traits\TimestampFormat;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -9,6 +10,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class JobOfferFactory extends Factory
 {
+    use TimestampFormat;
     /**
      * Define the model's default state.
      *
@@ -22,9 +24,6 @@ class JobOfferFactory extends Factory
             'required_level' => fake()->randomElement(['junior', 'mid', 'senior']),
             'work_type' => fake()->randomElement(['remote', 'stationary', 'hybrid']),
             'work_schedule' => fake()->randomElement(['part time', 'full time']),
-            'requirements' => json_encode([fake()->text(20)]),
-            'responsibilities' => json_encode([fake()->text(20)]),
-            'benefits' => json_encode([fake()->text(20)]),
         ];
     }
 }
