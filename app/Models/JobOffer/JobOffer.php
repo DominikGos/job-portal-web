@@ -18,6 +18,7 @@ class JobOffer extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'title',
         'valid_until',
         'required_level',
