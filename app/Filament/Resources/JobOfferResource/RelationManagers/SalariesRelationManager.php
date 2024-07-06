@@ -23,19 +23,22 @@ class SalariesRelationManager extends RelationManager
         return $form
             ->schema([
                 Textarea::make('description')->required(),
-                TextInput::make('from')->numeric(),
-                TextInput::make('to')->numeric()->gt('from'),
-                Select::make('currency')->options(Salaries::class)
+                TextInput::make('from')
+                    ->numeric()
+                    ->required(),
+                TextInput::make('to')
+                    ->numeric()
+                    ->gt('from')
+                    ->required(),
+                Select::make('currency')
+                    ->options(Salaries::class)
+                    ->required()
             ]);
     }
 
     public function table(Table $table): Table
     {
         return $table
-            ->groups([
-                Group::make('from')
-                    ->getDescriptionFromRecordUsing(fn (Salary $salary): string => $salary->currency),
-            ])
             ->recordTitleAttribute('description')
             ->columns([
                 TextColumn::make('fromToWithCurrency'),

@@ -18,7 +18,10 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\Filter;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 
 class JobOfferResource extends Resource
 {
@@ -31,7 +34,9 @@ class JobOfferResource extends Resource
         return $form
             ->schema([
                 TextInput::make('title')->required(),
-                DatePicker::make('valid_until')->required(),
+                DatePicker::make('valid_until')
+                    ->afterOrEqual('today')
+                    ->required(),
                 Select::make('required_level')
                     ->options(JobLevels::class),
                 Select::make('work_type')
@@ -39,6 +44,7 @@ class JobOfferResource extends Resource
                 Select::make('work_schedule')
                     ->options(WorkSchedules::class),
                 Select::make('user_id')
+                    ->label('Author')
                     ->relationship('user', 'name')
                     ->searchable(['name', 'email'])
                     ->required(),
@@ -54,10 +60,24 @@ class JobOfferResource extends Resource
                 TextColumn::make('work_type'),
                 TextColumn::make('work_schedule'),
                 TextColumn::make('valid_until')->dateTime(),
+                TextColumn::make('created_at')
+                    ->label('Created At')
+                    ->sortable()
+                    ->date(),
 
             ])
             ->filters([
-                //
+                SelectFilter::make('required_level')
+                    ->options(JobLevels::class)
+                    ->multiple(),
+                SelectFilter::make('work_type')
+                    ->options(WorkTypes::class)
+                    ->multiple(),
+                SelectFilter::make('work_schedule')
+                    ->options(WorkSchedules::class)
+                    ->multiple(),
+                Filter::make('valid offers')
+                    ->query(fn (Builder $query): Builder => $query->validJobOffers()),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
