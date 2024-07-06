@@ -59,7 +59,7 @@ class JobOfferResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('title'),
+                TextColumn::make('title')->searchable(),
                 TextColumn::make('required_level'),
                 TextColumn::make('work_type'),
                 TextColumn::make('work_schedule'),
