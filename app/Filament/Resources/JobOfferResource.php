@@ -48,6 +48,10 @@ class JobOfferResource extends Resource
                     ->relationship('user', 'name')
                     ->searchable(['name', 'email'])
                     ->required(),
+                Select::make('skills')
+                    ->multiple()
+                    ->relationship('skills', 'content')
+                    ->preload()
             ]);
     }
 
