@@ -10,6 +10,7 @@ use App\Filament\Resources\JobOfferResource\RelationManagers;
 use App\Filament\Resources\JobOfferResource\RelationManagers\BenefitsRelationManager;
 use App\Filament\Resources\JobOfferResource\RelationManagers\RequirementsRelationManager;
 use App\Filament\Resources\JobOfferResource\RelationManagers\ResponsibilitiesRelationManager;
+use App\Filament\Resources\JobOfferResource\RelationManagers\SalariesRelationManager;
 use App\Models\JobOffer\JobOffer;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
@@ -23,6 +24,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
 
 class JobOfferResource extends Resource
 {
@@ -51,10 +53,10 @@ class JobOfferResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('title'),
-                TextColumn::make('valid_until')->dateTime(),
                 TextColumn::make('required_level'),
                 TextColumn::make('work_type'),
                 TextColumn::make('work_schedule'),
+                TextColumn::make('valid_until')->dateTime(),
 
             ])
             ->filters([
@@ -75,7 +77,8 @@ class JobOfferResource extends Resource
         return [
             RequirementsRelationManager::class,
             ResponsibilitiesRelationManager::class,
-            BenefitsRelationManager::class
+            BenefitsRelationManager::class,
+            SalariesRelationManager::class,
         ];
     }
 
