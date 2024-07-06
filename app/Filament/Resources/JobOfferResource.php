@@ -7,6 +7,9 @@ use App\Enums\JobOffer\WorkSchedules;
 use App\Enums\JobOffer\WorkTypes;
 use App\Filament\Resources\JobOfferResource\Pages;
 use App\Filament\Resources\JobOfferResource\RelationManagers;
+use App\Filament\Resources\JobOfferResource\RelationManagers\BenefitsRelationManager;
+use App\Filament\Resources\JobOfferResource\RelationManagers\RequirementsRelationManager;
+use App\Filament\Resources\JobOfferResource\RelationManagers\ResponsibilitiesRelationManager;
 use App\Models\JobOffer\JobOffer;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
@@ -70,7 +73,9 @@ class JobOfferResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RequirementsRelationManager::class,
+            ResponsibilitiesRelationManager::class,
+            BenefitsRelationManager::class
         ];
     }
 

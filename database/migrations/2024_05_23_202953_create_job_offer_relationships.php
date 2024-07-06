@@ -25,6 +25,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('job_offer_id')->constrained('job_offers')->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('content');
+            $table->timestamps();
         });
     }
 
