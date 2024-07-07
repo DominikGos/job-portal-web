@@ -3,18 +3,16 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\SkillResource\Pages;
-use App\Filament\Resources\SkillResource\RelationManagers;
 use App\Models\Skill;
-use Filament\Forms;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\FileUpload;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Table;
 use Illuminate\Contracts\Support\Htmlable;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class SkillResource extends Resource
 {
@@ -26,7 +24,11 @@ class SkillResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('content'),
+                TextInput::make('content')
+                    ->required(),
+                FileUpload::make('icon')
+                    ->image()
+                    ->imageEditor()
             ]);
     }
 
@@ -35,6 +37,7 @@ class SkillResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('content'),
+                ImageColumn::make('icon'),
             ])
             ->filters([
                 //
@@ -65,7 +68,8 @@ class SkillResource extends Resource
         ];
     }
 
-    public static function getNavigationIcon(): string | Htmlable | null {
+    public static function getNavigationIcon(): string | Htmlable | null
+    {
         return 'heroicon-o-academic-cap';
     }
 }

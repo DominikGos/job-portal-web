@@ -11,5 +11,6 @@ class Skill extends Model
 
     protected $fillable = [
         'content',
+        'icon'
     ];
 }
