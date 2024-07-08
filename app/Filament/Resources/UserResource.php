@@ -8,11 +8,13 @@ use App\Filament\Resources\UserResource\RelationManagers\ExperienceRelationManag
 use App\Filament\Resources\UserResource\RelationManagers\LinksRelationManager;
 use App\Models\User\User;
 use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Contracts\Support\Htmlable;
@@ -32,6 +34,7 @@ class UserResource extends Resource
                 TextInput::make('password')->required()->visibleOn('create'),
                 TextInput::make('phone'),
                 TextInput::make('description'),
+                FileUpload::make('avatar')->avatar(),
                 Select::make('skills')
                     ->multiple()
                     ->relationship('skills', 'content')
@@ -43,9 +46,14 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name'),
+                TextColumn::make('name')
+                    ->searchable(),
                 TextColumn::make('email'),
                 TextColumn::make('phone'),
+                ImageColumn::make('avatar'),
+                TextColumn::make('created_at')
+                    ->label('Created At')
+                    ->sortable(),
             ])
             ->filters([
                 //
