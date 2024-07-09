@@ -38,7 +38,12 @@ class UserResource extends Resource
                 Select::make('skills')
                     ->multiple()
                     ->relationship('skills', 'content')
+                    ->preload(),
+                Select::make('applications')
                     ->preload()
+                    ->relationship('applications', 'title')
+                    ->multiple()
+                    ->label('User applications'),
             ]);
     }
 
