@@ -57,6 +57,10 @@ class JobOffer extends Model
         return $this->hasMany(Responsibility::class);
     }
 
+    public function applications(): BelongsToMany {
+        return $this->belongsToMany(User::class, 'job_offer_applications', 'job_offer_id', 'user_id');
+    }
+
     public function scopeJobOffersAtLevel(Builder $query, JobLevels $level): void {
         $query->where('required_level', $level);
     }

@@ -72,4 +72,8 @@ class User extends Authenticatable
     public function skills(): BelongsToMany {
         return $this->belongsToMany(Skill::class, 'user_skills');
     }
+
+    public function applications(): BelongsToMany {
+        return $this->belongsToMany(JobOffer::class, 'job_offer_applications', 'user_id', 'job_offer_id');
+    }
 }

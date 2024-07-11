@@ -51,7 +51,12 @@ class JobOfferResource extends Resource
                 Select::make('skills')
                     ->multiple()
                     ->relationship('skills', 'content')
+                    ->preload(),
+                Select::make('applications')
                     ->preload()
+                    ->relationship('applications', 'name')
+                    ->multiple()
+                    ->label('Candidates'),
             ]);
     }
 
