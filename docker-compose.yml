@@ -10,6 +10,7 @@ services:
       - app
     volumes:
       - ./:/var/www/html
+      - /var/www/html/vendor
     depends_on:
       - database
 
@@ -24,6 +25,7 @@ services:
       - "8080:80"
     volumes:
       - ./:/var/www/html
+      - /var/www/html/vendor
     depends_on:
       - app
 
